@@ -1,8 +1,9 @@
-from mesa import Model
+from mesa import Model, Agent
 from mesa.time import SimultaneousActivation
 from mesa.space import MultiGrid
 
 from src.agents import ForagingAnt, Environment
+from src.agents.foodAgent import Food
 
 
 class Anthill(Model):
@@ -41,16 +42,22 @@ class Anthill(Model):
         for ant in range(self.initial_ants):
             pos = groups[ant % self.initial_ants_group]
             f = ForagingAnt(self.next_id(), self, pos)
-            self.grid.place_agent(f, pos)
-            self.schedule.add(f)
+            self.register(f)
 
         # Inicialização do ambiente
         for (_, x, y) in self.grid.coord_iter():
             e = Environment(self.next_id(), self, (x, y))
-            self.grid.place_agent(e, (x, y))
-            self.schedule.add(e)
+            self.register(e)
+
+        # Inicializando food
+        food = Food(self.next_id(), self, (50, 50), 100)
+        self.register(food)
 
         self.running = True
 
     def step(self):
         self.schedule.step()
+
+    def register(self, agent: Agent):
+        self.grid.place_agent(agent, agent.pos)
+        self.schedule.add(agent)

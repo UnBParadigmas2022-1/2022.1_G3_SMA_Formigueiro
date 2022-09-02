@@ -1,5 +1,5 @@
 from mesa import Agent
-from src.agents import ForagingAnt, Environment
+from src.agents import ForagingAnt, Environment, Food
 from functools import singledispatch
 
 
@@ -29,4 +29,14 @@ def environment(agent: Environment):
         "Layer": 0,
         "w": 1,
         "h": 1
+    }
+
+@render.register(Food)
+def food(agent: Food):
+    return {
+        "Color": "#00ff00",
+        "Shape": "circle",
+        "Filled": "true",
+        "Layer": 1,
+        "r": agent.wealth / 5
     }
