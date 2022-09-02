@@ -1,5 +1,6 @@
 from mesa import Agent
-from . import Food
+
+from src.agents import Environment, Food
 from src.utils import calculate_distance
 
 
@@ -39,7 +40,6 @@ class ForagingAnt(Agent):
         # Voltando para casa
         elif self.state == HOMING:
             if self.pos != self.home:
-                from src.agents import Environment
                 e = self.get_item(Environment)
                 e.deposit_pheromone()
                 self.home_move()
@@ -47,27 +47,32 @@ class ForagingAnt(Agent):
                 self.state = FORAGING
 
     def home_move(self):
-        from src.agents import Environment
-        distances = [
+        possible_home = [
             (calculate_distance(agent.pos, self.home), agent.pos)
             for agent in self.model.grid.get_neighbors(self.pos, True)
             if type(agent) is Environment
         ]
-        possible_home = min(distances, key=lambda i: i[0])
-        self.model.grid.move_agent(self, possible_home[1])
+        possible_home.sort(key=(lambda i: i[0]))
+        if possible_home[0][1] == self.home:
+            self.model.grid.move_agent(self, possible_home[0][1])
+        else:
+            self.model.grid.move_agent(self, possible_home[1][1])
 
     def food_move(self):
-        from src.agents import Environment
-        possible_food = min([
+        possible_food = [
             (agent.pheromone, agent.pos)
             for agent in self.model.grid.get_neighbors(self.pos, True)
-            if type(agent) is Environment
-        ], key=(lambda i: i[0]))
+            if type(agent) is Environment and agent.pheromone > 0
+        ]
 
-        if possible_food[0] > self.model.min_pheromone_needed:
-            self.model.grid.move_agent(self, possible_food[1])
-        else:
+        if not possible_food:
             self.random_move()
+        else:
+            possible_food = min(possible_food, key=(lambda i: i[0]))
+            if possible_food[0] > self.model.min_pheromone_needed:
+                self.model.grid.move_agent(self, possible_food[1])
+            else:
+                self.random_move()
 
     def random_move(self):
         possible_food = self.random.choice(
