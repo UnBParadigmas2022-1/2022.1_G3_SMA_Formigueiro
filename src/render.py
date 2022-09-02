@@ -35,10 +35,9 @@ def environment(agent: Environment):
 def food(agent: Food):
     return {
         "Color": "#00ff00",
-        "Shape": "circle",
+        "Shape": "rect",
         "Filled": "true",
-        "Layer": 2,
-        "r": max(agent.wealth / 5, 10),
-        "text": agent.wealth,
-        "text_color": "#000000"
+        "Layer": 1,
+        "w": 1,
+        "h": 1
     }

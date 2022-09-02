@@ -1,3 +1,3 @@
-from .foragingAgent import *
-from .environmentAgent import *
 from .foodAgent import *
+from .environmentAgent import *
+from .foragingAgent import *

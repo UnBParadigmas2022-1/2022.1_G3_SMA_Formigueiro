@@ -1,10 +1,11 @@
+from random import randint
 import src.utils as utils
 from mesa import Model, Agent
 from mesa.time import SimultaneousActivation
 from mesa.space import MultiGrid
 
 from src.agents import ForagingAnt, Environment
-from src.agents.foodAgent import Food
+from src.agents.foodAgent import Food, create_food_group
 
 
 class Anthill(Model):
@@ -51,9 +52,7 @@ class Anthill(Model):
             e = Environment(self.next_id(), self, (x, y))
             self.register(e)
 
-        food = Food(self.next_id(), self, (50, 50), 20)
-        self.register(food)
-        self.foods.append(food)
+        self.create_foods()
 
         self.running = True
 
@@ -62,11 +61,18 @@ class Anthill(Model):
         self.check_empty_foods()
 
     def check_empty_foods(self):
-        empty_foods = filter(lambda f: f.is_empty(), self.foods)
+        if not self.foods:
+            self.create_foods()
 
-        for food in empty_foods:
-            food.fill()
-            self.grid.move_agent(food, utils.random_pos(self.width, self.height))
+    def create_foods(self):
+        radius = randint(1, 20)
+        xInitial, yInitial = utils.random_pos(self.width-radius, self.height-radius)
+
+        for x, y in create_food_group(xInitial, yInitial, radius):
+            food = Food(self.next_id(), self, (x, y))
+            self.register(food)
+            self.foods.append(food)
+
 
     def register(self, agent: Agent):
         self.grid.place_agent(agent, agent.pos)
