@@ -37,7 +37,7 @@ def food(agent: Food):
         "Color": "#00ff00",
         "Shape": "rect",
         "Filled": "true",
-        "Layer": 1,
+        "Layer": 2,
         "w": 1,
         "h": 1
     }

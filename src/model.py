@@ -26,7 +26,7 @@ class Anthill(Model):
         self.schedule = SimultaneousActivation(self)
         self.grid = MultiGrid(self.width, self.height, torus=True)
 
-        self.foods = []
+        self.foods = 0
         self.initial_ants = initial_ants
         self.initial_ants_group = initial_ants_group
         self.random_change_to_move = random_change_to_move / 100
@@ -61,8 +61,11 @@ class Anthill(Model):
         self.check_empty_foods()
 
     def check_empty_foods(self):
-        if not self.foods:
+        if self.foods == 0:
             self.create_foods()
+
+    def decrement_food(self):
+        self.foods -= 1
 
     def create_foods(self):
         radius = randint(1, 20)
@@ -71,7 +74,7 @@ class Anthill(Model):
         for x, y in create_food_group(xInitial, yInitial, radius):
             food = Food(self.next_id(), self, (x, y))
             self.register(food)
-            self.foods.append(food)
+            self.foods += 1
 
 
     def register(self, agent: Agent):

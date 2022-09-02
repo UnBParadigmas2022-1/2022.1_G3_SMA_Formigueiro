@@ -1,5 +1,5 @@
 from mesa import Agent
-
+from . import Food
 from src.utils import calculate_distance
 
 
@@ -25,13 +25,17 @@ class ForagingAnt(Agent):
     def step(self):
         # Procurando comida
         if self.state == FORAGING:
-            # food = self.get_item(Food)
+            food = self.get_item(Food)
 
-            # if not food:
-            if self.random.random() > self.model.random_change_to_move:
-                self.food_move()
+            if not food:
+                if self.random.random() > self.model.random_change_to_move:
+                    self.food_move()
+                else:
+                    self.random_move()
             else:
-                self.random_move()
+                food.eat()
+                self.state = HOMING
+            
         # Voltando para casa
         elif self.state == HOMING:
             if self.pos != self.home:
@@ -39,19 +43,22 @@ class ForagingAnt(Agent):
                 e = self.get_item(Environment)
                 e.deposit_pheromone()
                 self.home_move()
+            else:
+                self.state = FORAGING
 
     def home_move(self):
         from src.agents import Environment
-        possible_home = min([
-            calculate_distance(agent.pos, self.home)
+        distances = [
+            (calculate_distance(agent.pos, self.home), agent.pos)
             for agent in self.model.grid.get_neighbors(self.pos, True)
             if type(agent) is Environment
-        ])
-        self.model.grid.move_agent(self, possible_food[0])
+        ]
+        possible_home = min(distances, key=lambda i: i[0])
+        self.model.grid.move_agent(self, possible_home[1])
 
     def food_move(self):
         from src.agents import Environment
-        possible_food = max([
+        possible_food = min([
             (agent.pheromone, agent.pos)
             for agent in self.model.grid.get_neighbors(self.pos, True)
             if type(agent) is Environment

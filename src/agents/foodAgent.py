@@ -5,6 +5,10 @@ class Food(Agent):
         super().__init__(current_id, model)
         self.pos = pos
 
+    def eat(self):
+        self.model.grid.remove_agent(self)
+        self.model.decrement_food()
+
 
 def create_food_group(xInitial, yInitial, radius):
     for x in range(-radius, radius+1):
