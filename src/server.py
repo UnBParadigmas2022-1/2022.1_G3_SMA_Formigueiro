@@ -1,37 +1,10 @@
 import mesa
 
 from src.model import Anthill
-from src.agents import ForagingAnt, Environment
+from src.render import render
 
 
-def ant(agent):
-    if agent is None:
-        return
-
-    portrayal = {}
-
-    if type(agent) is ForagingAnt:
-        portrayal["Color"] = "#8B4513"
-        portrayal["Shape"] = "rect"
-        portrayal["Filled"] = "true"
-        portrayal["Layer"] = 1
-        portrayal["w"] = 1
-        portrayal["h"] = 1
-
-    if type(agent) is Environment:
-        portrayal["Shape"] = "rect"
-        portrayal["Filled"] = "true"
-        portrayal["Layer"] = 0
-        portrayal["w"] = 1
-        portrayal["h"] = 1
-
-        gradient = min(int(255 * agent.pheromone), 255)
-        portrayal["Color"] = '#FF%02x%02x' % (255 - gradient, 255 - gradient)
-    
-    return portrayal
-
-
-canvas_element = mesa.visualization.CanvasGrid(ant, 100, 100, 600, 600)
+canvas_element = mesa.visualization.CanvasGrid(render, 100, 100, 600, 600)
 
 
 model_params = {
