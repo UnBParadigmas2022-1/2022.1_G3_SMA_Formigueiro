@@ -37,6 +37,8 @@ def food(agent: Food):
         "Color": "#00ff00",
         "Shape": "circle",
         "Filled": "true",
-        "Layer": 1,
-        "r": agent.wealth / 5
+        "Layer": 2,
+        "r": max(agent.wealth / 5, 10),
+        "text": agent.wealth,
+        "text_color": "#000000"
     }

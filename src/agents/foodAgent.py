@@ -1,4 +1,5 @@
 from mesa import Agent
+from random import randint
 
 class Food(Agent):
     
@@ -10,7 +11,9 @@ class Food(Agent):
     def step(self):
         self.wealth -= 1
 
-    def random_move(self):
-        possible_food = self.random.choice(
-            self.model.grid.get_neighborhood(self.pos, True))
-        self.model.grid.move_agent(self, possible_food)
+    def is_empty(self):
+        return self.wealth == 0
+
+    def fill(self):
+        self.wealth = randint(10, 100)
+

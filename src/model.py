@@ -1,3 +1,4 @@
+import src.utils as utils
 from mesa import Model, Agent
 from mesa.time import SimultaneousActivation
 from mesa.space import MultiGrid
@@ -24,6 +25,7 @@ class Anthill(Model):
         self.schedule = SimultaneousActivation(self)
         self.grid = MultiGrid(self.width, self.height, torus=True)
 
+        self.foods = []
         self.initial_ants = initial_ants
         self.initial_ants_group = initial_ants_group
         self.random_change_to_move = random_change_to_move / 100
@@ -49,14 +51,22 @@ class Anthill(Model):
             e = Environment(self.next_id(), self, (x, y))
             self.register(e)
 
-        # Inicializando food
-        food = Food(self.next_id(), self, (50, 50), 100)
+        food = Food(self.next_id(), self, (50, 50), 20)
         self.register(food)
+        self.foods.append(food)
 
         self.running = True
 
     def step(self):
         self.schedule.step()
+        self.check_empty_foods()
+
+    def check_empty_foods(self):
+        empty_foods = filter(lambda f: f.is_empty(), self.foods)
+
+        for food in empty_foods:
+            food.fill()
+            self.grid.move_agent(food, utils.random_pos(self.width, self.height))
 
     def register(self, agent: Agent):
         self.grid.place_agent(agent, agent.pos)
