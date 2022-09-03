@@ -14,7 +14,7 @@ def foraging(agent: ForagingAnt):
         "Color": "#8B4513",
         "Shape": "rect",
         "Filled": "true",
-        "Layer": 1,
+        "Layer": 2,
         "w": 1,
         "h": 1
     }
@@ -37,7 +37,7 @@ def food(agent: Food):
         "Color": "#00ff00",
         "Shape": "rect",
         "Filled": "true",
-        "Layer": 2,
+        "Layer": 1,
         "w": 1,
         "h": 1
     }

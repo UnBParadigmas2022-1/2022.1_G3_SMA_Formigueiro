@@ -15,6 +15,8 @@ class ForagingAnt(Agent):
         self.state = FORAGING
         self.home = pos
         self.pos = pos
+        self.with_food = False
+        self.go_home = self.random.randrange(100, 200)
 
     # Retorna o agente que se encontra na posição atual
     # Baseado no exemplo sugarscape do mesa
@@ -29,21 +31,29 @@ class ForagingAnt(Agent):
             food = self.get_item(Food)
 
             if not food:
-                if self.random.random() > self.model.random_change_to_move:
+                self.go_home -= 1
+                if self.go_home <= 0:
+                    self.home_move()
+                    self.state = HOMING
+                elif self.random.random() > self.model.random_change_to_move:
                     self.food_move()
                 else:
                     self.random_move()
             else:
                 food.eat()
+                self.with_food = True
                 self.state = HOMING
             
         # Voltando para casa
         elif self.state == HOMING:
             if self.pos != self.home:
-                e = self.get_item(Environment)
-                e.deposit_pheromone()
+                if self.with_food:
+                    e = self.get_item(Environment)
+                    e.deposit_pheromone()
                 self.home_move()
             else:
+                self.go_home = self.random.randrange(100, 200)
+                self.with_food = False
                 self.state = FORAGING
 
     def home_move(self):
