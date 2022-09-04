@@ -6,6 +6,7 @@ class Queen(Agent):
         self.pos = pos
 
     def step(self):
-        print("testando\n")
+        self.model.create_ant(self)
+
 
     

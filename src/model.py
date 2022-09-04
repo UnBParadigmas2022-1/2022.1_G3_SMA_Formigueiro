@@ -49,8 +49,10 @@ class Anthill(Model):
             self.register(f)
 
         # Inicialização da rainha
-        q = Queen(self.next_id(), self, pos)
-        self.register(q)
+        for ant in range(self.initial_ants_group):
+            pos = groups[ant % self.initial_ants_group]
+            q = Queen(self.next_id(), self, pos)
+            self.register(q)
 
         # Inicialização do ambiente
         for (_, x, y) in self.grid.coord_iter():
@@ -80,6 +82,10 @@ class Anthill(Model):
             food = Food(self.next_id(), self, (x, y))
             self.register(food)
             self.foods += 1
+
+    def create_ant(self, agent):
+        f = ForagingAnt(self.next_id(), self, ((agent.pos[0] + 1), (agent.pos[1] + 1)))
+        self.register(f)
 
 
     def register(self, agent: Agent):
