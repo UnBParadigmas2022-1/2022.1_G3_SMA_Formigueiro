@@ -103,14 +103,16 @@ class ForagingAnt(Agent):
         # Se tiver encontrado comida, randomiza e usa um desses pontos
         if food_points:
             self.model.grid.move_agent(self, self.random.choice(food_points))
-
         # Se não tiver encontrado nem comida nem feromônio movimenta aleatoriamente
-        if not possible_food:
+        elif not possible_food:
             self.random_move()
         # Se não, usa o caminho com a menor quantidade de feromônio e que
         # se encontra mais distante de casa.
         else:
-            possible_food = min(possible_food, key=(lambda i: i[0] - calculate_distance(i[1], self.home)))
+            possible_food = min(
+                possible_food,
+                key=(lambda i: i[0] - (10 * calculate_distance(i[1], self.home)))
+            )
             if possible_food[0] > self.model.min_pheromone_needed:
                 self.model.grid.move_agent(self, possible_food[1])
             else:
