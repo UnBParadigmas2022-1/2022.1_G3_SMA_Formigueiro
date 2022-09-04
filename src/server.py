@@ -20,6 +20,9 @@ model_params = {
     "random_change_to_move": mesa.visualization.Slider(
         "Possibilidade de realizar movimento aleatório", 20, 0, 100
     ),
+    "random_create_male": mesa.visualization.Slider(
+        "Probalidade da rainha gerar um macho", 30, 0, 100
+    ),
     "min_pheromone_needed": mesa.visualization.Slider(
         "Quantidade mínima de feromônio para movimentação", 5, 0, 20
     ),

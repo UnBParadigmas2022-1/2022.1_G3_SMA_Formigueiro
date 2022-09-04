@@ -1,3 +1,4 @@
+from operator import getitem
 from random import randint
 from src.agents.maleAgent import Male
 from src.agents.queenAgent import Queen
@@ -18,6 +19,7 @@ class Anthill(Model):
         initial_ants_male,
         initial_ants_group,
         random_change_to_move,
+        random_create_male,
         min_pheromone_needed,
         pheromone_deposit_rate
     ):
@@ -34,6 +36,7 @@ class Anthill(Model):
         self.initial_ants_male = initial_ants_male
         self.initial_ants_group = initial_ants_group
         self.random_change_to_move = random_change_to_move / 100
+        self.random_create_male = random_create_male / 100
         self.min_pheromone_needed = min_pheromone_needed / 10
         self.pheromone_deposit_rate = pheromone_deposit_rate / 10
 
@@ -93,8 +96,15 @@ class Anthill(Model):
             self.foods += 1
 
     def create_ant(self, agent):
-        f = ForagingAnt(self.next_id(), self, ((agent.pos[0] + 1), (agent.pos[1] + 1)))
-        self.register(f)
+        radius = randint(1, 5)
+        xInitial = agent.pos[0]-radius
+        yInitial = agent.pos[1]-radius
+        possible_create_ant = utils.random_create_ant()
+        if possible_create_ant <= self.random_create_male:
+            new_ant = Male(self.next_id(), self, (xInitial, yInitial))
+        else:
+            new_ant = ForagingAnt(self.next_id(), self, (xInitial, yInitial))
+        self.register(new_ant)
 
 
     def register(self, agent: Agent):
