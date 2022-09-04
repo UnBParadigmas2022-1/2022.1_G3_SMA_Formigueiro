@@ -29,6 +29,12 @@ model_params = {
     "ant_age_gain": mesa.visualization.Slider(
         "Porcentagem de vida da formiga ganha com comida", 50, 1, 100
     ),
+    "food_radius": mesa.visualization.Slider(
+        "Raio da comida", 15, 1, 30
+    ),
+    "food_smell_distance": mesa.visualization.Slider(
+        "Distância do cheiro da comida", 5, 0, 10
+    ),
 }
 
 
