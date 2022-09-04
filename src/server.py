@@ -11,6 +11,9 @@ model_params = {
     "initial_ants": mesa.visualization.Slider(
         "População inicial de formigas", 100, 10, 300
     ),
+    "initial_ants_male": mesa.visualization.Slider(
+        "População inicial de formigas macho", 2, 1, 10
+    ),
     "initial_ants_group": mesa.visualization.Slider(
         "Quantidade inicial de formigueiros", 2, 1, 10
     ),

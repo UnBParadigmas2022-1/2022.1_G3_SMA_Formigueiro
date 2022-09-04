@@ -1,4 +1,5 @@
 from random import randint
+from src.agents.maleAgent import Male
 from src.agents.queenAgent import Queen
 import src.utils as utils
 from mesa import Model, Agent
@@ -10,10 +11,11 @@ from src.agents.foodAgent import Food, create_food_group
 
 
 class Anthill(Model):
-    
+
     def __init__(
         self,
         initial_ants,
+        initial_ants_male,
         initial_ants_group,
         random_change_to_move,
         min_pheromone_needed,
@@ -29,6 +31,7 @@ class Anthill(Model):
 
         self.foods = 0
         self.initial_ants = initial_ants
+        self.initial_ants_male = initial_ants_male
         self.initial_ants_group = initial_ants_group
         self.random_change_to_move = random_change_to_move / 100
         self.min_pheromone_needed = min_pheromone_needed / 10
@@ -53,6 +56,12 @@ class Anthill(Model):
             pos = groups[ant % self.initial_ants_group]
             q = Queen(self.next_id(), self, pos)
             self.register(q)
+
+         # Inicialização da formiga macho
+        for ant in range(self.initial_ants_male):
+            pos = groups[ant % self.initial_ants_group]
+            m = Male(self.next_id(), self, pos)
+            self.register(m)
 
         # Inicialização do ambiente
         for (_, x, y) in self.grid.coord_iter():
