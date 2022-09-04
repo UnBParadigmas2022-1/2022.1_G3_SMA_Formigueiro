@@ -36,9 +36,10 @@ class Anthill(Model):
         self.initial_ants_male = initial_ants_male
         self.initial_ants_group = initial_ants_group
         self.random_change_to_move = random_change_to_move / 100
-        self.random_create_male = random_create_male / 100
+        self.random_create_male = random_create_male
         self.min_pheromone_needed = min_pheromone_needed / 10
         self.pheromone_deposit_rate = pheromone_deposit_rate / 10
+        self.kill_agents = []
 
         # Inicialização dos formigueiros
         groups = []
@@ -57,13 +58,13 @@ class Anthill(Model):
         # Inicialização da rainha
         for ant in range(self.initial_ants_group):
             pos = groups[ant % self.initial_ants_group]
-            q = Queen(self.next_id(), self, pos)
+            q = Queen(self.next_id(), self, pos, ant)
             self.register(q)
 
-         # Inicialização da formiga macho
+        # Inicialização da formiga macho
         for ant in range(self.initial_ants_male):
             pos = groups[ant % self.initial_ants_group]
-            m = Male(self.next_id(), self, pos)
+            m = Male(self.next_id(), self, utils.random_pos(self.width, self.height), -1)
             self.register(m)
 
         # Inicialização do ambiente
@@ -77,6 +78,10 @@ class Anthill(Model):
 
     def step(self):
         self.schedule.step()
+        for x in self.kill_agents:
+            self.grid.remove_agent(x)
+            self.schedule.remove(x)
+            self.kill_agents.remove(x)
         self.check_empty_foods()
 
     def check_empty_foods(self):
@@ -96,12 +101,12 @@ class Anthill(Model):
             self.foods += 1
 
     def create_ant(self, agent):
-        radius = randint(1, 5)
+        radius = randint(1, 10)
         xInitial = agent.pos[0]-radius
         yInitial = agent.pos[1]-radius
         possible_create_ant = utils.random_create_ant()
         if possible_create_ant <= self.random_create_male:
-            new_ant = Male(self.next_id(), self, (xInitial, yInitial))
+            new_ant = Male(self.next_id(), self, (xInitial, yInitial), agent.id_anthill)
         else:
             new_ant = ForagingAnt(self.next_id(), self, (xInitial, yInitial))
         self.register(new_ant)
