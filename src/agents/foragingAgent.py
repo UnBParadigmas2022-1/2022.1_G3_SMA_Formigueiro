@@ -10,11 +10,14 @@ HOMING = 'VOLTANDO'
 
 class ForagingAnt(Agent):
     
-    def __init__(self, current_id, model, pos):
+    def __init__(self, current_id, model, pos, color):
         super().__init__(current_id, model)
         self.state = FORAGING
         self.home = pos
         self.pos = pos
+        self.decomposing = True
+        self.age = self.model.ant_max_age + self.random.randrange(75, 200)
+        self.color = color
         self.with_food = False
         self.go_home = self.random.randrange(100, 200)
 
@@ -26,8 +29,17 @@ class ForagingAnt(Agent):
                 return agent
 
     def step(self):
-        food = self.get_item(Food)
+        if self.age <= 0:
+            if self.decomposing:
+                self.decomposing = False
+                food = Food(
+                    self.model.next_id(),
+                    self.model, self.pos
+                )
+                self.model.register(food)
+            return
 
+        food = self.get_item(Food)
         # Procurando comida
         if self.state == FORAGING:
             # Não encontrou comida
@@ -46,6 +58,7 @@ class ForagingAnt(Agent):
             # Achou comida, volta pra casa com ela
             else:
                 food.eat()
+                self.age *= (1 + (self.model.ant_age_gain / 100))
                 self.with_food = True
                 self.state = HOMING
             
@@ -70,6 +83,8 @@ class ForagingAnt(Agent):
                 self.go_home = self.random.randrange(100, 200)
                 self.with_food = False
                 self.state = FORAGING
+
+        self.age -= 1
 
     # Procura caminhos para voltar pra casa, para não ser ideal usa
     # o segundo melhor caminho encontrado. Se o melhor caminho for 

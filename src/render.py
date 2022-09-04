@@ -10,14 +10,15 @@ def render(agent: Agent):
 
 @render.register(ForagingAnt)
 def foraging(agent: ForagingAnt):
-    return {
-        "Color": "#8B4513",
-        "Shape": "rect",
-        "Filled": "true",
-        "Layer": 2,
-        "w": 1,
-        "h": 1
-    }
+    if agent.age > 0:
+        return {
+            "Color": '#%02x%02x%02x' % tuple(agent.color),
+            "Shape": "rect",
+            "Filled": "true",
+            "Layer": 2,
+            "w": 1,
+            "h": 1
+        }
 
 @render.register(Environment)
 def environment(agent: Environment):
