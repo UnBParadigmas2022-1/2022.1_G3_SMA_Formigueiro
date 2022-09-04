@@ -16,7 +16,8 @@ class Anthill(Model):
         initial_ants_group,
         random_change_to_move,
         min_pheromone_needed,
-        pheromone_deposit_rate
+        pheromone_deposit_rate,
+        food_smell_distance
     ):
 
         self.current_id = 1
@@ -32,6 +33,7 @@ class Anthill(Model):
         self.random_change_to_move = random_change_to_move / 100
         self.min_pheromone_needed = min_pheromone_needed / 10
         self.pheromone_deposit_rate = pheromone_deposit_rate / 10
+        self.food_smell_distance = food_smell_distance / 10
 
         # Inicialização dos formigueiros
         groups = []
@@ -75,7 +77,6 @@ class Anthill(Model):
             food = Food(self.next_id(), self, (x, y))
             self.register(food)
             self.foods += 1
-
 
     def register(self, agent: Agent):
         self.grid.place_agent(agent, agent.pos)

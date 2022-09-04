@@ -41,6 +41,8 @@ class ForagingAnt(Agent):
                     self.random_move()
             else:
                 food.eat()
+                e = get_item(self, Environment)
+                e.food_smell = 0
                 self.with_food = True
                 self.state = HOMING
             

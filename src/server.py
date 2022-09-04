@@ -23,6 +23,9 @@ model_params = {
     "pheromone_deposit_rate": mesa.visualization.Slider(
         "Quantidade depositada de feromônio", 1, 0, 10
     ),
+    "food_smell_distance": mesa.visualization.Slider(
+        "Distância do cheiro da comida", 1, 0, 10
+    ),
 }
 
 
