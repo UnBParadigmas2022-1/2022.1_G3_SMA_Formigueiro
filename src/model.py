@@ -1,4 +1,5 @@
 from random import randint
+from src.agents.queenAgent import Queen
 import src.utils as utils
 from mesa import Model, Agent
 from mesa.time import SimultaneousActivation
@@ -46,6 +47,10 @@ class Anthill(Model):
             pos = groups[ant % self.initial_ants_group]
             f = ForagingAnt(self.next_id(), self, pos)
             self.register(f)
+
+        # Inicialização da rainha
+        q = Queen(self.next_id(), self, pos)
+        self.register(q)
 
         # Inicialização do ambiente
         for (_, x, y) in self.grid.coord_iter():
