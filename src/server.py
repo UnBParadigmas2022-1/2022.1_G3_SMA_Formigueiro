@@ -18,10 +18,16 @@ model_params = {
         "Possibilidade de realizar movimento aleatório", 20, 0, 100
     ),
     "min_pheromone_needed": mesa.visualization.Slider(
-        "Quantidade mínima de feromônio para movimentação", 5, 0, 20
+        "Quantidade mínima de feromônio para movimentação", 2, 0, 20
     ),
     "pheromone_deposit_rate": mesa.visualization.Slider(
-        "Quantidade depositada de feromônio", 1, 0, 10
+        "Quantidade depositada de feromônio", 8, 0, 10
+    ),
+    "ant_max_age": mesa.visualization.Slider(
+        "Idade máxima inicial da formiga", 5, 3, 15
+    ),
+    "ant_age_gain": mesa.visualization.Slider(
+        "Porcentagem de vida da formiga ganha com comida", 50, 1, 100
     ),
 }
 

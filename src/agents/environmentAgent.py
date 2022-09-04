@@ -10,7 +10,7 @@ class Environment(Agent):
 
     def step(self):
         if self.pheromone > 0:
-            self.pheromone -= 0.03
+            self.pheromone -= 0.01
 
     def deposit_pheromone(self):
         if self.pheromone < 1:
@@ -25,4 +25,4 @@ class Environment(Agent):
             self.random.shuffle(neighbors)
             for e in neighbors[:2]:
                 e.pheromone = min(
-                    self.pheromone + self.model.pheromone_deposit_rate - 0.05, 1)
+                    self.pheromone + self.model.pheromone_deposit_rate, 1)
