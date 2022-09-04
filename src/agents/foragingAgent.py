@@ -105,6 +105,7 @@ class ForagingAnt(Agent):
 
     # Procura feromônios
     def food_move(self):
+        food_smells = []
         food_points = []
         possible_food = []
         neighbors = self.model.grid.get_neighbors(self.pos, True)
@@ -113,16 +114,27 @@ class ForagingAnt(Agent):
             # Salva se o vizinho for um ponto de comida
             if type(agent) is Food:
                 food_points.append(agent.pos)
-            # Se não, só salva se tiver feromônio
-            elif type(agent) is Environment and agent.pheromone > 0:
-                possible_food.append((agent.pheromone, agent.pos))
+            else:
+                # Se não, só salva se tiver feromônio
+                if type(agent) is Environment and agent.pheromone > 0:
+                    possible_food.append((agent.pheromone, agent.pos))
+                # Se não, só salva se tiver cheiro de comida
+                if type(agent) is Environment and agent.food_smell > 0:
+                    food_smells.append((agent.food_smell, agent.pos))
 
         # Se tiver encontrado comida, randomiza e usa um desses pontos
         if food_points:
             self.model.grid.move_agent(self, self.random.choice(food_points))
-        # Se não tiver encontrado nem comida nem feromônio movimenta aleatoriamente
-        elif not possible_food:
+        # Se não tiver encontrado nem comida, nem feromônio e nem cheiro movimenta aleatoriamente
+        elif not possible_food and not food_smells:
             self.random_move()
+        # Se tiver encontrado cheiro de comida, segue pelo cheiro
+        elif not possible_food:
+            food_smells = max(
+                food_smells,
+                key=(lambda i: i[0])
+            )
+            self.model.grid.move_agent(self, food_smells[1])    
         # Se não, usa o caminho com a menor quantidade de feromônio e que
         # se encontra mais distante de casa.
         else:

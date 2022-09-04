@@ -30,7 +30,7 @@ model_params = {
         "Porcentagem de vida da formiga ganha com comida", 50, 1, 100
     ),
     "food_smell_distance": mesa.visualization.Slider(
-        "Distância do cheiro da comida", 1, 0, 10
+        "Distância do cheiro da comida", 5, 0, 10
     ),
 }
 
