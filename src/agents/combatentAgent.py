@@ -2,7 +2,7 @@ from mesa import Agent
 
 from src.agents import ForagingAnt
 from src.agents.foodAgent import Food
-from src.utils import get_item
+from src.utils import get_item, random_move
 
 
 class CombatentAnt(Agent):
@@ -40,12 +40,6 @@ class CombatentAnt(Agent):
             self.hurt(foraging_oponent)
         
         else:
-            self.random_move()
+            random_move(self)
 
         self.age -= 1
-    
-    # Movimento aleatório
-    def random_move(self):
-        possible_food = self.random.choice(
-            self.model.grid.get_neighborhood(self.pos, True))
-        self.model.grid.move_agent(self, possible_food)

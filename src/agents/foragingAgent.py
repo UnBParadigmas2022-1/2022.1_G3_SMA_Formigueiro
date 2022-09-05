@@ -1,7 +1,7 @@
 from mesa import Agent
 
 from src.agents import Environment, Food
-from src.utils import calculate_distance, get_item
+from src.utils import calculate_distance, get_item, random_move
 
 
 FORAGING = 'PROCURANDO'
@@ -48,7 +48,7 @@ class ForagingAnt(Agent):
                     self.food_move()
                 # Se não, movimento aleatório
                 else:
-                    self.random_move()
+                    random_move(self)
             # Achou comida, volta pra casa com ela
             else:
                 food.eat()
@@ -121,7 +121,7 @@ class ForagingAnt(Agent):
             self.model.grid.move_agent(self, self.random.choice(food_points))
         # Se não tiver encontrado nem comida, nem feromônio e nem cheiro movimenta aleatoriamente
         elif not possible_food and not food_smells:
-            self.random_move()
+            random_move(self)
         # Se tiver encontrado cheiro de comida, segue pelo cheiro
         elif not possible_food:
             food_smells = max(
@@ -139,10 +139,4 @@ class ForagingAnt(Agent):
             if possible_food[0] > self.model.min_pheromone_needed:
                 self.model.grid.move_agent(self, possible_food[1])
             else:
-                self.random_move()
-
-    # Movimento aleatório, caso final de todos os movimentos
-    def random_move(self):
-        possible_food = self.random.choice(
-            self.model.grid.get_neighborhood(self.pos, True))
-        self.model.grid.move_agent(self, possible_food)
+                random_move(self)
