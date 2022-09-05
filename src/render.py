@@ -13,20 +13,32 @@ def render(agent: Agent):
 
 @render.register(ForagingAnt)
 def foraging(agent: ForagingAnt):
-    return {
-        "Color": "#8B4513",
-        "Shape": "rect",
-        "Filled": "true",
-        "Layer": 2,
-        "w": 1,
-        "h": 1
-    }
+    if agent.age > 0:
+        return {
+            "Color": '#%02x%02x%02x' % tuple(agent.color),
+            "Shape": "rect",
+            "Filled": "true",
+            "Layer": 2,
+            "w": 1,
+            "h": 1
+        }
 
 @render.register(Environment)
 def environment(agent: Environment):
-    gradient = min(int(255 * agent.pheromone), 255)
+    if agent.pheromone > 0:
+        gradient = min(int(255 * agent.pheromone), 255)
+        return {
+            "Color": '#FF%02x%02x' % (255 - gradient, 255 - gradient),
+            "Shape": "rect",
+            "Filled": "true",
+            "Layer": 0,
+            "w": 1,
+            "h": 1
+        }
+
+    gradient = min(int(125 * agent.food_smell), 255)
     return {
-        "Color": '#FF%02x%02x' % (255 - gradient, 255 - gradient),
+        "Color": '#%02xFF%02x' % (255 - gradient, 255 - gradient),
         "Shape": "rect",
         "Filled": "true",
         "Layer": 0,

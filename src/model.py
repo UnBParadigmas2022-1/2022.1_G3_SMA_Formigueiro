@@ -7,8 +7,7 @@ from mesa import Model, Agent
 from mesa.time import SimultaneousActivation
 from mesa.space import MultiGrid
 
-from src.agents import ForagingAnt, Environment
-from src.agents.foodAgent import Food, create_food_group
+from src.agents import ForagingAnt, Environment, FoodGroup
 
 
 class Anthill(Model):
@@ -18,10 +17,14 @@ class Anthill(Model):
         initial_ants,
         initial_ants_male,
         initial_ants_group,
+        ant_max_age,
+        ant_age_gain,
         random_change_to_move,
         random_create_male,
         min_pheromone_needed,
-        pheromone_deposit_rate
+        pheromone_deposit_rate,
+        food_radius,
+        food_smell_distance,
     ):
 
         self.current_id = 1
@@ -31,14 +34,17 @@ class Anthill(Model):
         self.schedule = SimultaneousActivation(self)
         self.grid = MultiGrid(self.width, self.height, torus=True)
 
-        self.foods = 0
         self.initial_ants = initial_ants
         self.initial_ants_male = initial_ants_male
         self.initial_ants_group = initial_ants_group
+        self.ant_age_gain = ant_age_gain
+        self.ant_max_age = ant_max_age * 25
         self.random_change_to_move = random_change_to_move / 100
         self.random_create_male = random_create_male
         self.min_pheromone_needed = min_pheromone_needed / 10
         self.pheromone_deposit_rate = pheromone_deposit_rate / 10
+        self.food_smell_distance = food_smell_distance / 10
+        self.food_radius = food_radius
         self.kill_agents = []
 
         # Inicialização dos formigueiros
@@ -46,13 +52,14 @@ class Anthill(Model):
         for group in range(self.initial_ants_group):
             groups.append((
                 self.random.randrange(self.width),
-                self.random.randrange(self.height)
+                self.random.randrange(self.height),
+                [self.random.randint(0, 125) for _ in range(3)]
             ))
 
         # Inicialização das formigas operárias
         for ant in range(self.initial_ants):
-            pos = groups[ant % self.initial_ants_group]
-            f = ForagingAnt(self.next_id(), self, pos)
+            x, y, color = groups[ant % self.initial_ants_group]
+            f = ForagingAnt(self.next_id(), self, (x, y), color)
             self.register(f)
 
         # Inicialização da rainha
@@ -72,7 +79,9 @@ class Anthill(Model):
             e = Environment(self.next_id(), self, (x, y))
             self.register(e)
 
-        self.create_foods()
+        # Inicialização da comida
+        food_group = FoodGroup(self.next_id(), self, self.food_radius)
+        self.register(food_group)
 
         self.running = True
 
@@ -82,24 +91,6 @@ class Anthill(Model):
             self.grid.remove_agent(x)
             self.schedule.remove(x)
             self.kill_agents.remove(x)
-        self.check_empty_foods()
-
-    def check_empty_foods(self):
-        if self.foods == 0:
-            self.create_foods()
-
-    def decrement_food(self):
-        self.foods -= 1
-
-    def create_foods(self):
-        radius = randint(1, 20)
-        xInitial, yInitial = utils.random_pos(self.width-radius, self.height-radius)
-
-        for x, y in create_food_group(xInitial, yInitial, radius):
-            food = Food(self.next_id(), self, (x, y))
-            self.register(food)
-            self.foods += 1
-
     def create_ant(self, agent):
         radius = randint(1, 10)
         xInitial = agent.pos[0]-radius
