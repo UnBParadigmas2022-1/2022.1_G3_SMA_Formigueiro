@@ -18,15 +18,15 @@
 | 19/0020377 |  [Thiago Sampaio de Paiva](https://github.com/thiagohdaqw/) |
 
 ## Sobre 
-O projeto trata da representação de um formigueiro fantasia, onde foram criadas algumas regras de convivências para cada agente existente no ecosistema. 
+O projeto trata da representação de um formigueiro fantasia, onde foram criadas algumas regras de convivência para cada agente existente no ecossistema. 
 
-Inicialmente foram criadas rainhas para determinar o ponto onde fica o formigueiro e também repoduzir para cada formigueiro existente, a cada reprodução, nascem de 6 a 12 formigas, existe 15% de chances de vir uma formiga macho, 70% de chances de ser uma operária e 15% de chances de ser uma formiga combatente.
+Inicialmente foram criadas rainhas para determinar o ponto onde fica o formigueiro e também repoduzir para cada formigueiro existente. A cada reprodução da rainha, nascem de 6 a 12 formigas, com 25% de chances de vir uma formiga macho, 60% de chances de ser uma operária e 15% de chances de ser uma formiga combatente.
 
 As formigas machos sempre procuram rainhas para reproduzir desde que não sejam suas progenitoras, e quando encontram nem sempre conseguem reproduzir...
 
 As formigas combatentes possuem um poder randômico para atacar as outros e possuem mais vida que as operárias. Sempre que ele encontra uma formiga de outro formigueiro ela ataca!
 
-As formigas precisam comer, se não uma hora morrem, por isso sempre que come uma comidinha elas incrementam a vida em alguns pontos.
+As formigas precisam comer, se não uma hora morrem, por isso sempre que comem uma comidinha elas incrementam a vida em alguns pontos.
 
 O cheiro da comida é o rastro deixado pela comida para que as formigas aas encontrem mais facilmente.
 
@@ -97,7 +97,7 @@ TEMPO: +/- 15min
 | Rafael Ramos  | --- | Excelente |
 | Thiago Paiva  | Comida | Excelente |
 | João Pedro Moura | ---- | Excelente |
-| Lucas Gomes | ---- | Excelente |
+| Lucas Gomes | Rainha e Formiga Macho | Excelente |
 | Lucas Boaventura |  ---| Excelente |
 | Dafne Moretti | --- | Excelente |
 | Igor Lima | ---- | Excelente |
