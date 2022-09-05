@@ -95,7 +95,7 @@ TEMPO: +/- 15min
 | :--:| :--: | :--: |
 | Antonio Aldisio  |  Rainha e formiga Macho | Excelente |
 | Rafael Ramos  | --- | Excelente |
-| Thiago Paiva  |  ---- | Excelente |
+| Thiago Paiva  | Comida | Excelente |
 | João Pedro Moura | ---- | Excelente |
 | Lucas Gomes | ---- | Excelente |
 | Lucas Boaventura |  ---| Excelente |
