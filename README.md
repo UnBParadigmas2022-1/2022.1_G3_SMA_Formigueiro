@@ -1,45 +1,50 @@
-# RepositorioTemplate
-Esse repositório é para ser utilizado pelos grupos como um template inicial, da home page do Projeto.
-As seções do Template NÃO DEVEM SER OMITIDAS, sendo TODAS RELEVANTES.
-
-**!! *Atenção: Renomeie o seu repositório para (Ano.Semestre)_(Grupo)_(Paradigma)_(NomeDoProjeto)*. !!** 
-
-Paradigmas:
- - Funcional
- - Logico
- - SMA
-
-**!! *Não coloque os nomes dos alunos no título do repositório*. !!**
-
-**!! *Exemplo de título correto: 2022.1_G1_Logico_ProjetoRoteirosAereos*. !!**
- 
- (Apague esses comentários)
-
-# NomeDoProjeto
+# Formigueiro
 
 **Disciplina**: FGA0210 - PARADIGMAS DE PROGRAMAÇÃO - T01 <br>
-**Nro do Grupo**: XX<br>
-**Paradigma**: XXXXXXXXXX<br>
+**Nro do Grupo**: 03<br>
+**Paradigma**: Sistemas Multiagentes<br>
 
 ## Alunos
+
 |Matrícula | Aluno |
-| -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| :--: | :--: |
+| 20/2028211 |  [Antônio Aldísio](https://github.com/AntonioAldisio/) |
+| 19/0026243 |  [Dafne Moretti Moreira](https://github.com/DafneM/) |
+| 18/0122258 |  [Igor Queiroz Lima](https://github.com/igorq937/) |
+| 19/0030879 |  [João Pedro Moura Oliveira](https://github.com/Joao-Moura/) |
+| 17/0080102 |  [Lucas Gomes Lopes](https://github.com/LucasGlopes/) |
+| 18/0114093 |  [Lucas Ursulino Boaventura](https://github.com/lboaventura25/) |
+| 19/0019085 |  [Rafael Cleydson da Silva Ramos](https://github.com/RcleydsonR/) |
+| 19/0020377 |  [Thiago Sampaio de Paiva](https://github.com/thiagohdaqw/) |
 
 ## Sobre 
-Descreva o seu projeto em linhas gerais. 
-Use referências, links, que permitam conhecer um pouco mais sobre o projeto.
+O projeto trata da representação de um formigueiro fantasia, onde foram criadas algumas regras de convivências para cada agente existente no ecosistema. 
+
+Inicialmente foram criadas rainhas para determinar o ponto onde fica o formigueiro e também repoduzir para cada formigueiro existente, a cada reprodução, nascem de 6 a 12 formigas, existe 15% de chances de vir uma formiga macho, 70% de chances de ser uma operária e 15% de chances de ser uma formiga combatente.
+
+As formigas machos sempre procuram rainhas para reproduzir desde que não sejam suas progenitoras, e quando encontram nem sempre conseguem reproduzir...
+
+As formigas combatentes possuem um poder randômico para atacar as outros e possuem mais vida que as operárias. Sempre que ele encontra uma formiga de outro formigueiro ela ataca!
+
+As formigas precisam comer, se não uma hora morrem, por isso sempre que come uma comidinha elas incrementam a vida em alguns pontos.
+
+O cheiro da comida é o rastro deixado pela comida para que as formigas aas encontrem mais facilmente.
+
+O feromônio é a substância química deixada pelas formigas para comunicarem as outras que encontrarem uma comida.
 
 ## Screenshots
-Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcionamento.
+
+<p>
+    <img src="https://user-images.githubusercontent.com/49161615/188467430-4aa6450d-3db8-4cd2-b8e8-0e5857e18b6a.png" width="700" height="400" />
+    <img src="https://user-images.githubusercontent.com/49161615/188467460-f61cc0c3-2c44-45de-a911-82920679e8fc.png" width="700" height="400" />
+</p>
+
 
 ## Instalação 
-**Linguagens**: xxxxxx<br>
-**Tecnologias**: xxxxxx<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
-Insira um manual ou um script para auxiliar ainda mais.
-Gifs animados e outras ilustrações são bem-vindos!
+**Linguagens**: Python<br>
+**Tecnologias**: Mesa e python<br>
+
+
 
 ## Uso 
 Explique como usar seu projeto.
