@@ -19,24 +19,24 @@
 
 ## Sobre 
 O projeto trata da representação de um formigueiro fantasia, onde foram criadas algumas regras de convivência para cada agente existente no ecossistema. 
-
 Inicialmente foram criadas rainhas para determinar o ponto onde fica o formigueiro e também repoduzir para cada formigueiro existente. A cada reprodução da rainha, nascem de 6 a 12 formigas, com 25% de chances de vir uma formiga macho, 60% de chances de ser uma operária e 15% de chances de ser uma formiga combatente.
 
 As formigas machos sempre procuram rainhas para reproduzir desde que não sejam suas progenitoras, e quando encontram nem sempre conseguem reproduzir...
 
 As formigas combatentes possuem um poder randômico para atacar as outros e possuem mais vida que as operárias. Sempre que ele encontra uma formiga de outro formigueiro ela ataca!
 
-As formigas precisam comer, se não uma hora morrem, por isso sempre que comem uma comidinha elas incrementam a vida em alguns pontos.
+As formigas precisam comer, se não uma hora morrem, por isso sempre que comem a sua vida é incrementada em alguns pontos.
 
-O cheiro da comida é o rastro deixado pela comida para que as formigas aas encontrem mais facilmente.
+O cheiro da comida é o rastro deixado pela comida para que as formigas às encontrem mais facilmente.
 
 O feromônio é a substância química deixada pelas formigas para comunicarem as outras que encontrarem uma comida.
 
 ## Screenshots
 
 <p>
-    <img src="https://user-images.githubusercontent.com/49161615/188467430-4aa6450d-3db8-4cd2-b8e8-0e5857e18b6a.png" width="700" height="400" />
-    <img src="https://user-images.githubusercontent.com/49161615/188467460-f61cc0c3-2c44-45de-a911-82920679e8fc.png" width="700" height="400" />
+    <img src="https://user-images.githubusercontent.com/49161615/188467430-4aa6450d-3db8-4cd2-b8e8-0e5857e18b6a.png"/>
+    <img src="https://user-images.githubusercontent.com/49161615/188467460-f61cc0c3-2c44-45de-a911-82920679e8fc.png"/>
+    <img src="https://user-images.githubusercontent.com/46077033/188521537-7a9bf23d-d00d-42f2-aca4-046efc7a6790.gif"/>
 </p>
 
 
@@ -47,6 +47,7 @@ O feromônio é a substância química deixada pelas formigas para comunicarem a
 
 ## Uso 
 Uso por ambiente virtual 
+
 ```bash
 $ git clone  https://github.com/UnBParadigmas2022-1/2022.1_G3_SMA_Formigueiro.git
 $ cd 2022.1_G3_SMA_Formigueiro
@@ -58,7 +59,7 @@ $ pip install -r requirements.txt
 $ mesa runserver
 ```
 
-Também pode ser usado com docker:
+Também pode ser usado com o <b>docker</b>:
 
 ```bash
 $ make build
@@ -75,18 +76,7 @@ e para parar e exculir
 $ make clean
 ```
 
-Explique como usar seu projeto.
-Procure ilustrar em passos, com apoio de telas do software.
-
 ## Vídeo
-Adicione 1 ou mais vídeos com a execução do projeto.
-Procure: 
-(i) Introduzir o projeto;
-(ii) Mostrar passo a passo o código, explicando-o, e deixando claro o que é de terceiros, e o que é contribuição real da equipe;
-(iii) Apresentar particularidades do Paradigma, da Linguagem, e das Tecnologias, e
-(iV) Apresentar lições aprendidas, contribuições, pendências, e ideias para trabalhos futuros.
-OBS: TODOS DEVEM PARTICIPAR, CONFERINDO PONTOS DE VISTA.
-TEMPO: +/- 15min
 
 
 ## Participações
@@ -94,33 +84,28 @@ TEMPO: +/- 15min
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | :--:| :--: | :--: |
 | Antonio Aldisio  |  Rainha e formiga Macho | Excelente |
-| Rafael Ramos  | --- | Excelente |
-| Thiago Paiva  | Comida | Excelente |
-| João Pedro Moura | ---- | Excelente |
+| Rafael Ramos  | Combatentes | Excelente |
+| Thiago Paiva  | Comida e Renderização | Excelente |
+| João Pedro Moura | Operárias e Estrutura geral do projeto | Excelente |
 | Lucas Gomes | Rainha e Formiga Macho | Excelente |
-| Lucas Boaventura |  ---| Excelente |
-| Dafne Moretti | --- | Excelente |
+| Lucas Boaventura | Combatentes | Excelente |
+| Dafne Moretti | Operárias | Excelente |
 | Igor Lima | Comida e Cheiro da Comida | Excelente |
-
-## Outros 
-Quaisquer outras informações sobre o projeto podem ser descritas aqui.
-(i) Lições Aprendidas;
 
 ### Percepções:
 Como o python tem uma trava no GIL(Global interpreter lock) as threads não são reais, uma vez que apenas uma thread tem controle sobre o interpretador, então não tivemos os desafios do paralelismo e concorrência.
 
 ### Fragilidades:
-As nossas fragilidades são relacionadas com a fidelidade do mundo real com o desenvolvido nesse projeto. Sendo assim, temos as seguintes:
+As nossas fragilidades são relacionadas com a fidelidade do mundo real, e com a utilização do paradigma em sí. Sendo assim, pontos de destaque:
 - Rainha eterna, ela não morre.
 - Decomposição imeditada de formiga morta.
 - Reprodução imeditada de novas formigas.
 - Ausência da necessidade de levar comida a rainha e as formigas machos.
-
+- Grande utilização do paradígma Orientado à Objetos para resolução de problemas.
 
 ### Trabalhos Futuros.
-Os trabalhamos futuros podem ser em cima das nossas fragilidades, mas também pode ser melhorar gráficamente o projeto, ou seja, colocar imagem de formigas ao invés de quadradinhos
-
+Os trabalhamos futuros podem ser em cima das nossas fragilidades, mas também pode ser melhorar gráficamente o projeto, ou seja, colocar imagem de formigas ao invés de quadradinhos. Outro ponto que pode ser destacado, é o desenvolvimento de novos agentes e a evolução dos já existentes, tornando cada vez mais fidedígna a simulação com a realidade. Por fim, vale a pena citar que a utilização de uma plataforma que possua uma maior escalabilidade também é bem vinda como uma inovação.
 
 ## Fontes
-Referencie, adequadamente, as referências utilizadas.
-Indique ainda, fontes de leitura complementares.
+- Inpirado em: Ants Model. Disponível em: https://github.com/mgoadric/ants-mesa
+- Documentação do Mesa. Disponível em: https://mesa.readthedocs.io/en/latest/index.html
