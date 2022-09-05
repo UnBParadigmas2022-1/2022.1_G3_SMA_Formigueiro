@@ -58,6 +58,23 @@ $ pip install -r requirements.txt
 $ mesa runserver
 ```
 
+Também pode ser usado com docker:
+
+```bash
+$ make build
+$ make run
+```
+Para parar o container
+
+```bash
+$ make stop
+```
+e para parar e exculir
+
+```bash
+$ make clean
+```
+
 Explique como usar seu projeto.
 Procure ilustrar em passos, com apoio de telas do software.
 
