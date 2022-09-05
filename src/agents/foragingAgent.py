@@ -1,7 +1,7 @@
 from mesa import Agent
 
 from src.agents import Environment, Food
-from src.utils import calculate_distance
+from src.utils import calculate_distance, get_item
 
 
 FORAGING = 'PROCURANDO'
@@ -21,25 +21,19 @@ class ForagingAnt(Agent):
         self.with_food = False
         self.go_home = self.random.randrange(100, 200)
 
-    # Retorna o agente que se encontra na posição atual
-    # Baseado no exemplo sugarscape do mesa
-    def get_item(self, agentType):
-        for agent in self.model.grid.get_cell_list_contents([self.pos]):
-            if type(agent) is agentType:
-                return agent
-
     def step(self):
         if self.age <= 0:
             if self.decomposing:
                 self.decomposing = False
                 food = Food(
                     self.model.next_id(),
-                    self.model, self.pos
+                    self.model, self.pos,
+                    self.model.food_group
                 )
                 self.model.register(food)
             return
 
-        food = self.get_item(Food)
+        food = get_item(self, Food)
         # Procurando comida
         if self.state == FORAGING:
             # Não encontrou comida
@@ -59,7 +53,7 @@ class ForagingAnt(Agent):
             else:
                 food.eat()
                 self.age *= (1 + (self.model.ant_age_gain / 100))
-                e = self.get_item(Environment)
+                e = get_item(self, Environment)
                 e.food_smell = 0
                 self.with_food = True
                 self.state = HOMING
@@ -68,7 +62,7 @@ class ForagingAnt(Agent):
         elif self.state == HOMING:
             # Enquanto não estiver em casa
             if self.pos != self.home:
-                e = self.get_item(Environment)
+                e = get_item(self, Environment)
                 # Se estiver carregando comida, deposita feromônio
                 if self.with_food:
                     e.deposit_pheromone()

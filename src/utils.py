@@ -12,3 +12,10 @@ def random_pos(width, height):
 
 def random_create_ant():
     return randint(0, 100)
+
+# Retorna o agente que se encontra na posição atual
+# Baseado no exemplo sugarscape do mesa
+def get_item(self, agent_type):
+    for agent in self.model.grid.get_cell_list_contents([self.pos]):
+        if type(agent) is agent_type and agent != self:
+            return agent

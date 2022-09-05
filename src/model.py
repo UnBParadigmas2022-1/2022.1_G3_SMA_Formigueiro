@@ -8,7 +8,7 @@ from mesa.time import SimultaneousActivation
 from mesa.space import MultiGrid
 
 from src.agents import ForagingAnt, Environment, FoodGroup
-
+from src.agents import ForagingAnt, Environment
 
 class Anthill(Model):
 
@@ -64,13 +64,13 @@ class Anthill(Model):
 
         # Inicialização da rainha
         for ant in range(self.initial_ants_group):
-            pos = groups[ant % self.initial_ants_group]
-            q = Queen(self.next_id(), self, pos)
+            x, y, _ = groups[ant % self.initial_ants_group]
+            q = Queen(self.next_id(), self, (x, y))
             self.register(q)
 
         # Inicialização da formiga macho
         for ant in range(self.initial_ants_male):
-            pos = groups[ant % self.initial_ants_group]
+            x, y, _ = groups[ant % self.initial_ants_group]
             m = Male(self.next_id(), self, utils.random_pos(self.width, self.height), -1)
             self.register(m)
 
@@ -80,8 +80,8 @@ class Anthill(Model):
             self.register(e)
 
         # Inicialização da comida
-        food_group = FoodGroup(self.next_id(), self, self.food_radius)
-        self.register(food_group)
+        self.food_group = FoodGroup(self.next_id(), self, self.food_radius)
+        self.register(self.food_group)
 
         self.running = True
 
