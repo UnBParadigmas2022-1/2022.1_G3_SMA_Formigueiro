@@ -13,15 +13,14 @@ def render(agent: Agent):
 
 @render.register(ForagingAnt)
 def foraging(agent: ForagingAnt):
-    if agent.age > 0:
-        return {
-            "Color": '#%02x%02x%02x' % tuple(agent.color),
-            "Shape": "rect",
-            "Filled": "true",
-            "Layer": 2,
-            "w": 1,
-            "h": 1
-        }
+    return {
+        "Color": '#%02x%02x%02x' % tuple(agent.color),
+        "Shape": "rect",
+        "Filled": "true",
+        "Layer": 2,
+        "w": 1,
+        "h": 1
+    }
 
 @render.register(Environment)
 def environment(agent: Environment):
@@ -80,12 +79,11 @@ def male(agent: Male):
     }
 @render.register(CombatentAnt)
 def combatentAnt(agent: CombatentAnt):
-    if agent.age > 0:
-        return {
-            "Color": '#%02x%02x%02x' % tuple(agent.color),
-            "Shape": "rect",''
-            "Filled": "true",
-            "Layer": 3,
-            "w": 1,
-            "h": 1
-        }
+    return {
+        "Color": '#%02x%02x%02x' % tuple(agent.color),
+        "Shape": "rect",''
+        "Filled": "true",
+        "Layer": 3,
+        "w": 1,
+        "h": 1
+    }

@@ -101,7 +101,8 @@ class Anthill(Model):
         for x in self.kill_agents:
             self.grid.remove_agent(x)
             self.schedule.remove(x)
-            self.kill_agents.remove(x)
+        self.kill_agents = []
+
     def create_ant(self, agent):
         radius = randint(1, 10)
         xInitial = agent.pos[0]-radius

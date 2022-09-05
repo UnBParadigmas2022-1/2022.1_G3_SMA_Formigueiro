@@ -15,7 +15,6 @@ class ForagingAnt(Agent):
         self.state = FORAGING
         self.home = pos
         self.pos = pos
-        self.decomposing = True
         self.age = self.model.ant_max_age + self.random.randrange(75, 200)
         self.color = color
         self.with_food = False
@@ -23,14 +22,13 @@ class ForagingAnt(Agent):
 
     def step(self):
         if self.age <= 0:
-            if self.decomposing:
-                self.decomposing = False
-                food = Food(
-                    self.model.next_id(),
-                    self.model, self.pos,
-                    self.model.food_group
-                )
-                self.model.register(food)
+            food = Food(
+                self.model.next_id(),
+                self.model, self.pos,
+                self.model.food_group
+            )
+            self.model.register(food)
+            self.model.kill_agents.append(self)
             return
 
         food = get_item(self, Food)
