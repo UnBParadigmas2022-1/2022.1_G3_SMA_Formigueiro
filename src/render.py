@@ -69,7 +69,7 @@ def queen(agent: Queen):
     }
 
 @render.register(Male)
-def queen(agent: Male):
+def male(agent: Male):
     return {
         "Color": "#0086ff",
         "Shape": "rect",

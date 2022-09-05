@@ -3,15 +3,15 @@ from src.agents.queenAgent import Queen
 
 
 class Male(Agent):
-    def __init__(self, current_id, model, pos, id_anthill):
+    def __init__(self, current_id, model, pos, origin):
         super().__init__(current_id, model)
         self.pos = pos
         self.find_queen = False
-        self.id_anthill = id_anthill
+        self.origin = origin
 
     def step(self):
-        for neighbor in self.model.grid.neighbor_iter(self.pos):
-            if type(neighbor) is Queen and neighbor.id_anthill != self.id_anthill:
+        for neighbor in self.model.grid.get_neighborhood(self.pos):
+            if type(neighbor) is Queen and neighbor.home != self.origin:
                 neighbor.reproduce()
                 self.find_queen = True
                 self.model.kill_agents.append(self)

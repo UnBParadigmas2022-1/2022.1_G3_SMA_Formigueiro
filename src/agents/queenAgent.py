@@ -1,10 +1,10 @@
 from mesa import Agent
 
 class Queen(Agent):
-    def __init__(self, current_id, model, pos, id_anthill):
+    def __init__(self, current_id, model, pos):
         super().__init__(current_id, model)
         self.pos = pos
-        self.id_anthill = id_anthill
+        self.home = self.pos
         
 
     def reproduce(self):

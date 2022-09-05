@@ -65,7 +65,7 @@ class Anthill(Model):
         # Inicialização da rainha
         for ant in range(self.initial_ants_group):
             pos = groups[ant % self.initial_ants_group]
-            q = Queen(self.next_id(), self, pos, ant)
+            q = Queen(self.next_id(), self, pos)
             self.register(q)
 
         # Inicialização da formiga macho
@@ -97,7 +97,7 @@ class Anthill(Model):
         yInitial = agent.pos[1]-radius
         possible_create_ant = utils.random_create_ant()
         if possible_create_ant <= self.random_create_male:
-            new_ant = Male(self.next_id(), self, (xInitial, yInitial), agent.id_anthill)
+            new_ant = Male(self.next_id(), self, (xInitial, yInitial), agent.home)
         else:
             new_ant = ForagingAnt(self.next_id(), self, (xInitial, yInitial))
         self.register(new_ant)
