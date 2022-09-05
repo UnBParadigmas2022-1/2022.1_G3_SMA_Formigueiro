@@ -100,7 +100,7 @@ TEMPO: +/- 15min
 | Lucas Gomes | Rainha e Formiga Macho | Excelente |
 | Lucas Boaventura |  ---| Excelente |
 | Dafne Moretti | --- | Excelente |
-| Igor Lima | ---- | Excelente |
+| Igor Lima | Comida e Cheiro da Comida | Excelente |
 
 ## Outros 
 Quaisquer outras informações sobre o projeto podem ser descritas aqui.
