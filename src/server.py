@@ -11,11 +11,17 @@ model_params = {
     "initial_ants": mesa.visualization.Slider(
         "População inicial de formigas", 100, 10, 300
     ),
+    "initial_ants_male": mesa.visualization.Slider(
+        "População inicial de formigas macho", 2, 1, 10
+    ),
     "initial_ants_group": mesa.visualization.Slider(
         "Quantidade inicial de formigueiros", 2, 1, 10
     ),
     "random_change_to_move": mesa.visualization.Slider(
         "Possibilidade de realizar movimento aleatório", 20, 0, 100
+    ),
+    "random_create_male": mesa.visualization.Slider(
+        "Probalidade da rainha gerar um macho", 30, 0, 100
     ),
     "min_pheromone_needed": mesa.visualization.Slider(
         "Quantidade mínima de feromônio para movimentação", 2, 0, 20

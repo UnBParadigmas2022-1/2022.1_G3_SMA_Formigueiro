@@ -1,6 +1,9 @@
 from mesa import Agent
 from src.agents import ForagingAnt, Environment, Food
 from functools import singledispatch
+from src.agents.maleAgent import Male
+
+from src.agents.queenAgent import Queen
 
 
 @singledispatch
@@ -50,6 +53,28 @@ def food(agent: Food):
         "Shape": "rect",
         "Filled": "true",
         "Layer": 1,
+        "w": 1,
+        "h": 1
+    }
+
+@render.register(Queen)
+def queen(agent: Queen):
+    return {
+        "Color": "#f7fb4b",
+        "Shape": "rect",
+        "Filled": "true",
+        "Layer": 2,
+        "w": 2,
+        "h": 2
+    }
+
+@render.register(Male)
+def male(agent: Male):
+    return {
+        "Color": "#0086ff",
+        "Shape": "rect",
+        "Filled": "true",
+        "Layer": 2,
         "w": 1,
         "h": 1
     }

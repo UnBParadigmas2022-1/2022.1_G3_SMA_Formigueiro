@@ -9,3 +9,6 @@ def random_pos(width, height):
         randint(0, width-1),
         randint(0, height-1)
     )
+
+def random_create_ant():
+    return randint(0, 100)
