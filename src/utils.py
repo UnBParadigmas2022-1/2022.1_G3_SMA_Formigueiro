@@ -20,6 +20,12 @@ def get_item(self, agent_type):
         if type(agent) is agent_type and agent != self:
             return agent
 
+
+def get_all_queens(self):
+    for agent in self.model.grid.get_cell_list_contents([self.pos]):
+        if type(agent) is agent_type and agent != self:
+            return agent
+
 def random_move(agent):
     possible_steps = agent.random.choice(
         agent.model.grid.get_neighborhood(agent.pos, True)

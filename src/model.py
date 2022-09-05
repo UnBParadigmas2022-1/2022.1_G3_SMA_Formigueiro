@@ -50,9 +50,9 @@ class Anthill(Model):
         self.combatent_ant_qtd = combatent_ant_qtd
 
         # Inicialização dos formigueiros
-        groups = []
+        self.groups = []
         for group in range(self.initial_ants_group):
-            groups.append((
+            self.groups.append((
                 self.random.randrange(self.width),
                 self.random.randrange(self.height),
                 [self.random.randint(0, 125) for _ in range(3)]
@@ -60,25 +60,25 @@ class Anthill(Model):
 
         # Inicialização das formigas operárias
         for ant in range(self.initial_ants):
-            x, y, color = groups[ant % self.initial_ants_group]
+            x, y, color = self.groups[ant % self.initial_ants_group]
             f = ForagingAnt(self.next_id(), self, (x, y), color)
             self.register(f)
 
         # Inicialização da rainha
         for ant in range(self.initial_ants_group):
-            x, y, _ = groups[ant % self.initial_ants_group]
+            x, y, _ = self.groups[ant % self.initial_ants_group]
             q = Queen(self.next_id(), self, (x, y))
             self.register(q)
 
         # Inicialização da formiga macho
         for ant in range(self.initial_ants_male):
-            x, y, _ = groups[ant % self.initial_ants_group]
+            x, y, _ = self.groups[ant % self.initial_ants_group]
             m = Male(self.next_id(), self, utils.random_pos(self.width, self.height), -1)
             self.register(m)
 
         # Inicialização das formigas combatentes
         for combatent_ant in range(self.combatent_ant_qtd):
-            x, y, color = groups[combatent_ant % self.initial_ants_group]
+            x, y, color = self.groups[combatent_ant % self.initial_ants_group]
             new_color = [i + 50 for i in color]
             c = CombatentAnt(self.next_id(), self, (x, y), new_color)
             self.register(c)
