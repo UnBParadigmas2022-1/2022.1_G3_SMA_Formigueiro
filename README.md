@@ -45,8 +45,19 @@ O feromônio é a substância química deixada pelas formigas para comunicarem a
 **Tecnologias**: Mesa e python<br>
 
 
-
 ## Uso 
+Uso por ambiente virtual 
+```bash
+$ git clone  https://github.com/UnBParadigmas2022-1/2022.1_G3_SMA_Formigueiro.git
+$ cd 2022.1_G3_SMA_Formigueiro
+
+$ python -m venv formigas
+$ source formigueiro/bin/activate
+$ pip install -r requirements.txt
+
+$ mesa runserver
+```
+
 Explique como usar seu projeto.
 Procure ilustrar em passos, com apoio de telas do software.
 
@@ -60,18 +71,38 @@ Procure:
 OBS: TODOS DEVEM PARTICIPAR, CONFERINDO PONTOS DE VISTA.
 TEMPO: +/- 15min
 
+
 ## Participações
-Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
+
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
-| -- | -- | -- |
-| Fulano  |  Programação dos Fatos da Base de Conhecimento Lógica | Boa |
+| :--:| :--: | :--: |
+| Antonio Aldisio  |  Rainha e formiga Macho | Excelente |
+| Rafael Ramos  | --- | Excelente |
+| Thiago Paiva  |  ---- | Excelente |
+| João Pedro Moura | ---- | Excelente |
+| Lucas Gomes | ---- | Excelente |
+| Lucas Boaventura |  ---| Excelente |
+| Dafne Moretti | --- | Excelente |
+| Igor Lima | ---- | Excelente |
 
 ## Outros 
 Quaisquer outras informações sobre o projeto podem ser descritas aqui.
 (i) Lições Aprendidas;
-(ii) Percepções;
-(iii) Contribuições e Fragilidades, e
-(iV) Trabalhos Futuros.
+
+### Percepções:
+Como o python tem uma trava no GIL(Global interpreter lock) as threads não são reais, uma vez que apenas uma thread tem controle sobre o interpretador, então não tivemos os desafios do paralelismo e concorrência.
+
+### Fragilidades:
+As nossas fragilidades são relacionadas com a fidelidade do mundo real com o desenvolvido nesse projeto. Sendo assim, temos as seguintes:
+- Rainha eterna, ela não morre.
+- Decomposição imeditada de formiga morta.
+- Reprodução imeditada de novas formigas.
+- Ausência da necessidade de levar comida a rainha e as formigas machos.
+
+
+### Trabalhos Futuros.
+Os trabalhamos futuros podem ser em cima das nossas fragilidades, mas também pode ser melhorar gráficamente o projeto, ou seja, colocar imagem de formigas ao invés de quadradinhos
+
 
 ## Fontes
 Referencie, adequadamente, as referências utilizadas.
