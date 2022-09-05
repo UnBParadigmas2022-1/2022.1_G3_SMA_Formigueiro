@@ -9,6 +9,8 @@ from mesa.space import MultiGrid
 
 from src.agents import ForagingAnt, Environment, FoodGroup
 from src.agents import ForagingAnt, Environment
+from src.agents.combatentAgent import CombatentAnt
+
 
 class Anthill(Model):
 
@@ -25,6 +27,7 @@ class Anthill(Model):
         pheromone_deposit_rate,
         food_radius,
         food_smell_distance,
+        combatent_ant_qtd
     ):
 
         self.current_id = 1
@@ -46,6 +49,7 @@ class Anthill(Model):
         self.food_smell_distance = food_smell_distance / 10
         self.food_radius = food_radius
         self.kill_agents = []
+        self.combatent_ant_qtd = combatent_ant_qtd
 
         # Inicialização dos formigueiros
         groups = []
@@ -73,6 +77,13 @@ class Anthill(Model):
             x, y, _ = groups[ant % self.initial_ants_group]
             m = Male(self.next_id(), self, utils.random_pos(self.width, self.height), -1)
             self.register(m)
+
+        # Inicialização das formigas combatentes
+        for combatent_ant in range(self.combatent_ant_qtd):
+            x, y, color = groups[combatent_ant % self.initial_ants_group]
+            new_color = [i + 50 for i in color]
+            c = CombatentAnt(self.next_id(), self, (x, y), new_color)
+            self.register(c)
 
         # Inicialização do ambiente
         for (_, x, y) in self.grid.coord_iter():

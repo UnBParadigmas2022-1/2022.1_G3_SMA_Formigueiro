@@ -41,6 +41,9 @@ model_params = {
     "food_smell_distance": mesa.visualization.Slider(
         "Distância do cheiro da comida", 5, 0, 10
     ),
+    "combatent_ant_qtd": mesa.visualization.Slider(
+        "Quantidade inicial de combatentes", 5, 1, 50
+    ),
 }
 
 

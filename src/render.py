@@ -1,5 +1,5 @@
 from mesa import Agent
-from src.agents import ForagingAnt, Environment, Food
+from src.agents import ForagingAnt, Environment, Food, CombatentAnt
 from functools import singledispatch
 from src.agents.maleAgent import Male
 
@@ -78,3 +78,14 @@ def male(agent: Male):
         "w": 1,
         "h": 1
     }
+@render.register(CombatentAnt)
+def combatentAnt(agent: CombatentAnt):
+    if agent.age > 0:
+        return {
+            "Color": '#%02x%02x%02x' % tuple(agent.color),
+            "Shape": "rect",''
+            "Filled": "true",
+            "Layer": 3,
+            "w": 1,
+            "h": 1
+        }
