@@ -22,7 +22,6 @@ class Anthill(Model):
         ant_max_age,
         ant_age_gain,
         random_change_to_move,
-        random_create_male,
         min_pheromone_needed,
         pheromone_deposit_rate,
         food_radius,
@@ -43,7 +42,6 @@ class Anthill(Model):
         self.ant_age_gain = ant_age_gain
         self.ant_max_age = ant_max_age * 25
         self.random_change_to_move = random_change_to_move / 100
-        self.random_create_male = random_create_male
         self.min_pheromone_needed = min_pheromone_needed / 10
         self.pheromone_deposit_rate = pheromone_deposit_rate / 10
         self.food_smell_distance = food_smell_distance / 10
@@ -108,12 +106,15 @@ class Anthill(Model):
         xInitial = agent.pos[0]-radius
         yInitial = agent.pos[1]-radius
         possible_create_ant = utils.random_create_ant()
-        if possible_create_ant <= self.random_create_male:
+        queen_group_color = utils.get_group_color(self.groups, (agent.pos[0], agent.pos[1]))
+        if possible_create_ant < 30:
             new_ant = Male(self.next_id(), self, (xInitial, yInitial), agent.home)
+        elif possible_create_ant >= 30  and possible_create_ant < 90:
+            new_ant = ForagingAnt(self.next_id(), self, (xInitial, yInitial), queen_group_color)
         else:
-            new_ant = ForagingAnt(self.next_id(), self, (xInitial, yInitial))
+            combatent_color = [i + 50 for i in queen_group_color]
+            new_ant = CombatentAnt(self.next_id(), self, (xInitial, yInitial), combatent_color)
         self.register(new_ant)
-
 
     def register(self, agent: Agent):
         self.grid.place_agent(agent, agent.pos)

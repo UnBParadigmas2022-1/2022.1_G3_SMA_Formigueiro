@@ -25,3 +25,8 @@ def random_move(agent):
         agent.model.grid.get_neighborhood(agent.pos, True)
     )
     agent.model.grid.move_agent(agent, possible_steps)
+
+def get_group_color(groups, findPos):
+    for x, y, color in groups:
+        if x == findPos[0] and y == findPos[1]:
+            return color

@@ -5,7 +5,6 @@ class Queen(Agent):
         super().__init__(current_id, model)
         self.pos = pos
         self.home = self.pos
-        
 
     def reproduce(self):
         self.model.create_ant(self)
