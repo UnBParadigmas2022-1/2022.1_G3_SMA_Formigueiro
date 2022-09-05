@@ -66,7 +66,7 @@ class ForagingAnt(Agent):
                     e.deposit_pheromone()
                     self.home_move()
                 # Se não, tiver comida e achar um caminho ou comida, faz o movimento de comida
-                elif food or e.pheromone > 0:
+                elif food or e.pheromone > 0 or e.food_smell:
                     self.state = FORAGING
                     self.food_move()
                 # Se não, só volta pra casa
