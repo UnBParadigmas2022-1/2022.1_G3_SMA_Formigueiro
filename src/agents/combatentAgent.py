@@ -12,10 +12,11 @@ class CombatentAnt(Agent):
         self.home = pos
         self.color = color
         self.age = self.model.ant_max_age + self.random.randrange(100, 250)
-        self.combatent_power = self.random.randrange(25, 50)
+        self.combatent_power = self.random.randrange(25, 75)
 
     def hurt(self, agent):
         agent.age -= self.combatent_power
+        self.age += self.combatent_power
 
     def step(self):
         if self.age <= 0:

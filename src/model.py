@@ -46,7 +46,7 @@ class Anthill(Model):
         self.pheromone_deposit_rate = pheromone_deposit_rate / 10
         self.food_smell_distance = food_smell_distance / 10
         self.food_radius = food_radius
-        self.kill_agents = []
+        self.kill_agents = []   
         self.combatent_ant_qtd = combatent_ant_qtd
 
         # Inicialização dos formigueiros
@@ -103,14 +103,14 @@ class Anthill(Model):
 
     def create_ant(self, agent):
         queen_group_color = utils.get_group_color(self.groups, (agent.pos[0], agent.pos[1]))
-        for _ in range(randint(5, 10)):
+        for _ in range(randint(6, 12)):
             radius = randint(1, 10)
             xInitial = agent.pos[0]-radius
             yInitial = agent.pos[1]-radius
             possible_create_ant = utils.random_create_ant()
-            if possible_create_ant < 15:
+            if possible_create_ant < 25:
                 new_ant = Male(self.next_id(), self, (xInitial, yInitial), agent.home)
-            elif possible_create_ant >= 15  and possible_create_ant < 85:
+            elif possible_create_ant >= 25  and possible_create_ant < 85:
                 new_ant = ForagingAnt(self.next_id(), self, (xInitial, yInitial), queen_group_color)
             else:
                 combatent_color = [i + 50 for i in queen_group_color]

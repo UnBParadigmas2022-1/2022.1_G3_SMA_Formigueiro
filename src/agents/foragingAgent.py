@@ -116,7 +116,7 @@ class ForagingAnt(Agent):
 
         # Se tiver encontrado comida, randomiza e usa um desses pontos
         if food_points:
-            self.model.grid.move_agent(self, self.random.choice(food_points))
+            self.model.grid.move_agent(self, food_points[0])
         # Se não tiver encontrado nem comida, nem feromônio e nem cheiro movimenta aleatoriamente
         elif not possible_food and not food_smells:
             random_move(self)

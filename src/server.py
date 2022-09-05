@@ -24,7 +24,7 @@ model_params = {
         "Quantidade mínima de feromônio para movimentação", 2, 0, 20
     ),
     "pheromone_deposit_rate": mesa.visualization.Slider(
-        "Quantidade depositada de feromônio", 8, 0, 10
+        "Quantidade depositada de feromônio", 6, 0, 10
     ),
     "ant_max_age": mesa.visualization.Slider(
         "Idade máxima inicial da formiga", 5, 3, 15

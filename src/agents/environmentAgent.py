@@ -36,7 +36,9 @@ class Environment(Agent):
             if type(e) is Food:
                 self.food_smell = self.model.food_smell_distance
                 return
-            elif type(e) is Environment and e.food_smell > 0.01:
+            elif type(e) is Environment and e.food_smell > 0.05:
                 sum_smell += e.food_smell
 
         self.food_smell = min(sum_smell/8, self.model.food_smell_distance)
+        if(self.food_smell <= 0.01):
+            self.food_smell = 0
