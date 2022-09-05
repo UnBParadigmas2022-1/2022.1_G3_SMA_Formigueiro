@@ -102,19 +102,20 @@ class Anthill(Model):
         self.kill_agents = []
 
     def create_ant(self, agent):
-        radius = randint(1, 10)
-        xInitial = agent.pos[0]-radius
-        yInitial = agent.pos[1]-radius
-        possible_create_ant = utils.random_create_ant()
         queen_group_color = utils.get_group_color(self.groups, (agent.pos[0], agent.pos[1]))
-        if possible_create_ant < 30:
-            new_ant = Male(self.next_id(), self, (xInitial, yInitial), agent.home)
-        elif possible_create_ant >= 30  and possible_create_ant < 90:
-            new_ant = ForagingAnt(self.next_id(), self, (xInitial, yInitial), queen_group_color)
-        else:
-            combatent_color = [i + 50 for i in queen_group_color]
-            new_ant = CombatentAnt(self.next_id(), self, (xInitial, yInitial), combatent_color)
-        self.register(new_ant)
+        for _ in range(randint(5, 10)):
+            radius = randint(1, 10)
+            xInitial = agent.pos[0]-radius
+            yInitial = agent.pos[1]-radius
+            possible_create_ant = utils.random_create_ant()
+            if possible_create_ant < 15:
+                new_ant = Male(self.next_id(), self, (xInitial, yInitial), agent.home)
+            elif possible_create_ant >= 15  and possible_create_ant < 85:
+                new_ant = ForagingAnt(self.next_id(), self, (xInitial, yInitial), queen_group_color)
+            else:
+                combatent_color = [i + 50 for i in queen_group_color]
+                new_ant = CombatentAnt(self.next_id(), self, (xInitial, yInitial), combatent_color)
+            self.register(new_ant)
 
     def register(self, agent: Agent):
         self.grid.place_agent(agent, agent.pos)
