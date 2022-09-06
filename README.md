@@ -19,7 +19,7 @@
 
 ## Sobre 
 O projeto trata da representação de um formigueiro fantasia, onde foram criadas algumas regras de convivência para cada agente existente no ecossistema. 
-Inicialmente foram criadas rainhas para determinar o ponto onde fica o formigueiro e também repoduzir para cada formigueiro existente. A cada reprodução da rainha, nascem de 6 a 12 formigas, com 25% de chances de vir uma formiga macho, 60% de chances de ser uma operária e 15% de chances de ser uma formiga combatente.
+Inicialmente foram criadas rainhas para determinar o ponto onde fica o formigueiro e também reproduzir para cada formigueiro existente. A cada reprodução da rainha, nascem de 6 a 12 formigas, com 25% de chance de vir uma formiga macho, 60% de chance de ser uma operária e 15% de chance de ser uma formiga combatente.
 
 As formigas machos sempre procuram rainhas para reproduzir desde que não sejam suas progenitoras, e quando encontram nem sempre conseguem reproduzir...
 
