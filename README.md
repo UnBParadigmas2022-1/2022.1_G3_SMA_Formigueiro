@@ -44,7 +44,6 @@ O feromônio é a substância química deixada pelas formigas para comunicarem a
 **Linguagens**: Python<br>
 **Tecnologias**: Mesa e python<br>
 
-
 ## Uso 
 Uso por ambiente virtual 
 
@@ -77,7 +76,7 @@ $ make clean
 ```
 
 ## Vídeo
-
+https://youtu.be/zzppunu7x84
 
 ## Participações
 
